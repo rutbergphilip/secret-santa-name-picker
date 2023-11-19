@@ -5,7 +5,32 @@ import { generateID, displayName } from '@/utils';
 
 import type { Participant } from '@/types';
 
-const participants = ref<Participant[]>([]);
+const participants = ref<Participant[]>([
+  {
+    id: '1',
+    firstName: 'Philip',
+  },
+  {
+    id: '2',
+    firstName: 'Emma',
+  },
+  {
+    id: '3',
+    firstName: 'Johan',
+  },
+  {
+    id: '4',
+    firstName: 'Pernilla',
+  },
+  {
+    id: '5',
+    firstName: 'Haley',
+  },
+  {
+    id: '6',
+    firstName: 'Curt',
+  },
+]);
 const firstName = ref('');
 const lastName = ref('');
 
