@@ -8,32 +8,7 @@ import type { Participant } from '@/types';
 
 const step = ref(1);
 const steps = ['Participants', 'Name selector'];
-const participants = ref<Participant[]>([
-  {
-    id: '1',
-    firstName: 'Philip',
-  },
-  {
-    id: '2',
-    firstName: 'Emma',
-  },
-  {
-    id: '3',
-    firstName: 'Johan',
-  },
-  {
-    id: '4',
-    firstName: 'Pernilla',
-  },
-  {
-    id: '5',
-    firstName: 'Haley',
-  },
-  {
-    id: '6',
-    firstName: 'Curt',
-  },
-]);
+const participants = ref<Participant[]>([]);
 const prevDisabled = computed(() => step.value === 1);
 const nextDisabled = computed(() => !participants.value.length || step.value === 2);
 </script>
