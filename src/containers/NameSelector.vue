@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 import type { PropType } from 'vue';
 import type { Participant } from '@/types';
@@ -28,6 +28,11 @@ const assignSecretSantas = () => {
   }
 };
 
+watchEffect(() => {
+  initialParticipants.value = props.participants;
+  assignSecretSantas();
+});
+
 onMounted(() => {
   assignSecretSantas();
 });
@@ -52,7 +57,7 @@ onMounted(() => {
         <v-btn icon="mdi-arrow-right" variant="tonal" @click="props.onClick" />
       </template>
       <v-window-item v-for="(santa, index) in initialParticipants" :key="index">
-        <v-card height="200px" class="d-flex justify-center align-center" color="">
+        <v-card height="200px" class="d-flex justify-center align-center">
           <div class="content">
             <v-label class="text-h5">{{ displayName(santa) }}</v-label>
             <v-label class="text-h5">is gifting to</v-label>
@@ -66,13 +71,11 @@ onMounted(() => {
     </v-window>
 
     <div class="actions">
-      <div class="selected">
-        <v-btn
-          :text="`${showName ? 'Hide name' : 'Show name'}`"
-          variant="tonal"
-          @click="showName = !showName"
-        />
-      </div>
+      <v-btn
+        :text="`${showName ? 'Hide name' : 'Show name'}`"
+        variant="tonal"
+        @click="showName = !showName"
+      />
     </div>
   </v-sheet>
 </template>
@@ -108,8 +111,7 @@ onMounted(() => {
   gap: 1rem;
 }
 
-.actions,
-.selected {
+.actions {
   display: flex;
   flex-direction: column;
   gap: 1rem;
