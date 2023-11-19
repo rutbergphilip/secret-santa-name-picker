@@ -1,15 +1,5 @@
-import type { Participant } from '@/types';
-
 export const generateID = (): string => {
   return Math.random().toString(36).substring(2, 9);
-};
-
-export const displayName = (participant?: Participant) => {
-  if (!participant) return;
-
-  return participant?.lastName
-    ? `${participant.firstName} ${participant.lastName}`
-    : participant.firstName;
 };
 
 export const shuffle = (array: any[]) => {

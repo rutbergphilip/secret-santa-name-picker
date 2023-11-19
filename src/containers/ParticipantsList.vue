@@ -1,25 +1,22 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
 
-import { generateID, displayName } from '@/utils';
+import { generateID } from '@/utils';
 
 import type { Participant } from '@/types';
 
 const participants = ref<Participant[]>([]);
-const firstName = ref('');
-const lastName = ref('');
+const name = ref('');
 
 const emit = defineEmits(['participants']);
 
 const addParticipant = () => {
-  if (!firstName.value) return;
+  if (!name.value) return;
   participants.value.push({
     id: generateID(),
-    firstName: firstName.value,
-    lastName: lastName.value,
+    name: name.value,
   });
-  firstName.value = '';
-  lastName.value = '';
+  name.value = '';
 };
 
 const removeParticipant = (id: string) => {
@@ -38,37 +35,27 @@ watch(
 <template>
   <v-list lines="one" class="list">
     <v-label>Add more participants</v-label>
-    <form action="submit">
+    <div class="new-participant align-end">
       <v-text-field
-        v-model="firstName"
+        v-model="name"
         clearable
-        label="First name*"
+        label="Name"
         variant="underlined"
         required
+        hide-details
       ></v-text-field>
-      <v-text-field
-        v-model="lastName"
-        clearable
-        label="Last name"
-        variant="underlined"
-      ></v-text-field>
-    </form>
-    <v-list-header inset class="list-header">
-      <label class="text-h5">Participants</label>
-      <v-btn
-        variant="outlined"
-        size="small"
-        color="green"
-        @click="addParticipant"
-        :disabled="!firstName"
+      <v-btn variant="outlined" size="small" color="green" @click="addParticipant" :disabled="!name"
         >Add participant</v-btn
       >
+    </div>
+    <v-list-header inset class="list-header">
+      <label class="text-h5">Participants</label>
     </v-list-header>
     <v-divider></v-divider>
     <v-list-item
       v-for="(participant, index) in participants"
       :key="index"
-      :title="displayName(participant)"
+      :title="participant.name"
     >
       <template v-slot:prepend>
         <v-avatar color="grey-lighten-1">
@@ -88,7 +75,7 @@ watch(
   flex-direction: column;
   gap: 1.5rem;
 
-  form {
+  .new-participant {
     display: flex;
     flex-grow: 1 1 auto;
     gap: 1rem;

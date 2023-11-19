@@ -4,7 +4,7 @@ import { ref, watchEffect } from 'vue';
 import type { PropType } from 'vue';
 import type { Participant } from '@/types';
 
-import { displayName, shuffle } from '@/utils';
+import { shuffle } from '@/utils';
 import { onMounted } from 'vue';
 
 const props = defineProps({
@@ -59,10 +59,10 @@ onMounted(() => {
       <v-window-item v-for="(santa, index) in initialParticipants" :key="index">
         <v-card height="200px" class="d-flex justify-center align-center">
           <div class="content">
-            <v-label class="text-h5">{{ displayName(santa) }}</v-label>
+            <v-label class="text-h5">{{ santa.name }}</v-label>
             <v-label class="text-h5">is gifting to</v-label>
             <v-label class="text-h5" v-if="showName">{{
-              displayName(assignedSantas.get(santa.id))
+              assignedSantas.get(santa.id)?.name
             }}</v-label>
             <v-label v-else>*******</v-label>
           </div>
