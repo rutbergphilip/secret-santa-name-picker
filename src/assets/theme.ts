@@ -6,7 +6,7 @@ export const customTheme = {
     foreground: '#1b1a27',
     foregroundLight: '#2c2b3c',
     text: '#a7a9be',
-    buttonText: '#fffffe', // new
+    buttonText: '#fffffe',
 
     // Card colors
     cardBackground: '#0f0e17',

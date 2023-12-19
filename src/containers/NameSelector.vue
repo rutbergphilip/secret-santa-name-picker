@@ -50,12 +50,6 @@ onMounted(() => {
       class="window"
       @update:modelValue="showName = false"
     >
-      <template v-slot:prev="{ props }">
-        <v-btn icon="mdi-arrow-left" variant="tonal" @click="props.onClick" />
-      </template>
-      <template v-slot:next="{ props }">
-        <v-btn icon="mdi-arrow-right" variant="tonal" @click="props.onClick" />
-      </template>
       <v-window-item v-for="(santa, index) in initialParticipants" :key="index">
         <v-card height="200px" class="d-flex justify-center align-center">
           <div class="content">
